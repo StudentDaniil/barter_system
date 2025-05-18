@@ -4,9 +4,12 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from api.v1.views import views
 
+
+app_name = 'v1'
+
 router = routers.DefaultRouter()
-router.register(r'ads', views.AdvertisementViewSet)
-router.register(r'proposals', views.ExchangeProposalViewSet, basename='proposals')
+router.register(r'ads', views.AdvertisementViewSet, basename='advertisement')
+router.register(r'proposals', views.ExchangeProposalViewSet, basename='proposal')
 
 schema_view = get_schema_view(
     openapi.Info(

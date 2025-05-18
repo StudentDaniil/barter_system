@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
 
 
 class Advertisement(models.Model):
@@ -48,7 +47,7 @@ class ExchangeProposal(models.Model):
         Advertisement,
         on_delete=models.CASCADE,
         related_name='sent_proposals',
-        verbose_name="Объявление отправителя"
+        verbose_name="Объявление инициирующего предложение "
     )
 
     ad_receiver = models.ForeignKey(
@@ -86,7 +85,7 @@ class ExchangeProposal(models.Model):
                 name='unique_proposal'
             )
         ]
-        db_table = 'ExchangeProposal'
+        db_table = 'exchangeProposal'
 
     def __str__(self):
         return f"#{self.id} {self.ad_sender.title} → {self.ad_receiver.title} ({self.get_status_display()})"
