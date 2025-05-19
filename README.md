@@ -52,7 +52,7 @@ python manage.py runserver
 python manage.py test
 ```
 ## Как пользоваться
-Для того чтобы создавать объявления/предложения_обмена с помощью страниц или запросов, нужно создать пользователя:```bash python manage.py createsuperuser ``` 
+Для того чтобы создавать объявления/предложения_обмена с помощью страниц или запросов, нужно создать пользователя:```python manage.py createsuperuser ``` 
 Или таким образом в python shell user1 = User.objects.create_user(
             username='user1',
             password='testpass123'

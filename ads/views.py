@@ -30,7 +30,7 @@ class AdCreateView(LoginRequiredMixin, CreateView):
     model = Advertisement
     form_class = AdForm
     template_name = 'ads/create.html'
-    success_url = reverse_lazy('ads:list')  # Перенаправление на список объявлений
+    success_url = reverse_lazy('ads:list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -55,10 +55,9 @@ class AdUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class AdDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Advertisement
-    template_name = "ads/delete.html"  # Шаблон подтверждения удаления
-    success_url = reverse_lazy("ads:list")  # Перенаправление после удаления
+    template_name = "ads/delete.html"
+    success_url = reverse_lazy("ads:list")
 
     def test_func(self):
-        # Проверка, что пользователь - автор объявления
         return self.get_object().user == self.request.user
 

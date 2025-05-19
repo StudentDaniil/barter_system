@@ -41,7 +41,6 @@ class ProposalCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('proposals:list')
 
     def form_valid(self, form):
-        # проверяем, что текущий пользователь – владелец ad_sender
         if form.cleaned_data['ad_sender'].user != self.request.user:
             form.add_error('ad_sender', 'Вы не владелец этого объявления')
             return self.form_invalid(form)
