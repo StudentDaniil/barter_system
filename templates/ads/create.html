@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Создать объявление{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">{% if object %}Редактировать{% else %}Создать{% endif %} объявление</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {% if form.title.errors %}
+        <div class="invalid-feedback d-block">
+            {{ form.title.errors }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+        <div class="col-md-6">
+            {{ form.condition.label_tag }}
+            {{ form.condition }}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        {{ form.image_url.label_tag }}
+        {{ form.image_url }}
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="{% url 'ads:list' %}" class="btn btn-secondary me-md-2">Отмена</a>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+</form>
+{% endblock %}

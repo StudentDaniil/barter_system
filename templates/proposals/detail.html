@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Предложение #{{ proposal.id }}{% endblock %}
+
+{% block content %}
+<h2>Предложение обмена №{{ proposal.id }}</h2>
+<p><strong>От:</strong> {{ proposal.ad_sender.title }} ({{ proposal.ad_sender.user.username }})</p>
+<p><strong>Кому:</strong> {{ proposal.ad_receiver.title }} ({{ proposal.ad_receiver.user.username }})</p>
+<p><strong>Комментарий:</strong><br>{{ proposal.comment|linebreaks }}</p>
+<p><strong>Статус:</strong> {{ proposal.get_status_display }}</p>
+<p class="text-muted">Создано: {{ proposal.created_at|date:"d.m.Y H:i" }}</p>
+
+<div class="mt-4">
+  {% if user == proposal.ad_sender.user or user == proposal.ad_receiver.user %}
+    <a href="{% url 'proposals:edit' proposal.id %}" class="btn btn-primary">Редактировать</a>
+  {% endif %}
+  {% if user == proposal.ad_sender.user %}
+    <a href="{% url 'proposals:delete' proposal.id %}" class="btn btn-danger">Удалить</a>
+  {% endif %}
+  <a href="{% url 'proposals:list' %}" class="btn btn-secondary">Назад к списку</a>
+</div>
+{% endblock %}
