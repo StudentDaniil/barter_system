@@ -16,8 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.contrib.auth import views as auth_views
+from ads import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('api.urls')),
+    path('ads/', include('ads.urls', namespace='ads')),
+    path('proposal/', include('proposal.urls', namespace='proposal')),
 ]
+
+

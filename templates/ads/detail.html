@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ ad.title }}{% endblock %}
+{% block content %}
+
+    <div class="mb-4"><h2>{{ ad.title }}</h2>
+        <p class="text-muted">{{ ad.created_at|date:"d.m.Y H:i" }} | {{ ad.user.username }}</p></div>
+    {% if ad.image_url %}
+
+        <div class="mb-3 text-center">
+            <img src="{{ ad.image_url }}" class="img-fluid rounded" alt="{{ ad.title }}"
+                 style="max-height: 400px; object-fit: contain;">
+        </div>
+    {% endif %}
+    <p>{{ ad.description }}</p>
+    <p><strong>Состояние:
+    </strong>
+        {{ ad.get_condition_display }}</p>
+    {% if user == ad.user %}
+
+        <div class="mt-4"><a href="{% url 'ads:edit' ad.id %}" class="btn btn-primary">Редактировать</a> <a
+                href="{% url 'ads:delete' ad.id %}" class="btn btn-danger">Удалить</a>
+        </div>
+    {% endif %}
+{% endblock %}
